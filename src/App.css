@@ -23,3 +23,21 @@ a:link, a:visited {
 a:hover, a:active {
     background-color: red;
 }
+
+.ulist {
+    font-family: Arial, Helvetica, sans-serif;
+   
+    width: 100%;
+  }
+  
+.ulist td {
+    border: 1px solid rgb(255, 255, 255);
+    padding: 8px;
+    background-color: #7ff37b;
+  }
+  
+.ulist tr:nth-child(even){background-color: #a7e7a5;}
+  
+.ulist tr:hover {background-color: #ddd;}
+  
+  

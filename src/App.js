@@ -3,13 +3,22 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
 } from "react-router-dom";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import Home from "./Home";
 import UsersList from "./UsersList";
 import  "./App.css";
+
+const PrivateRoute = ({children: Component, ...props}) => {
+ 
+      const val = localStorage.getItem("id");
+        return <Route {...props}>
+          {val? <Component/>: <Redirect to='/login'/>}
+      </Route>
+   }
 
 class App extends Component {
     render() {
@@ -23,6 +32,7 @@ class App extends Component {
                                 <Link to="/home">Home</Link>
                                 <Link to="/signup">Sign Up</Link>
                                 <Link to="/userslist">All Users</Link>
+
                             </nav>
                             <LogIn />
                         </Route>
@@ -31,10 +41,11 @@ class App extends Component {
                                 <Link to="/login">Log In</Link>
                                 <Link to="/home">Home</Link>
                                 <Link to="/userslist">All Users</Link>
+
                             </nav>
                             <SignUp />
                         </Route>
-                         <Route path="/">
+                         <Route path="/home">
                              <nav>
                                  <Link to="/login">Log In</Link>
                                  <Link to="/signup">Sign Up</Link>
@@ -43,15 +54,7 @@ class App extends Component {
 
                              <Home />
                         </Route>
-                        <Route path="/userslist">
-                             <nav>
-                                 <Link to="/login">Log In</Link>
-                                 <Link to="/signup">Sign Up</Link>
-                                 <Link to="/home">Home</Link>
-                             </nav>
-
-                             <UsersList />
-                        </Route>
+                       <PrivateRoute children={UsersList} path="/userslist"></PrivateRoute>
                     </Switch>
                 </div>
             </Router>
