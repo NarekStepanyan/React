@@ -15,8 +15,11 @@ class UsersList extends Component{
     }
     
     render() {
+
+        let currentUserId = localStorage.getItem("id");
         
         let usersList = Object.values(this.state)
+        .filter(item => item.id.toString() !== currentUserId)
         .map((obj, id) => <tr key={id.toString()}><td>{obj.fname}</td><td>{obj.lname}</td><td>from  {obj.country}</td></tr>);
         
         return (

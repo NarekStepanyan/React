@@ -31,22 +31,26 @@ const PrivateRoute = ({children: Component, ...rest}) => {
     );
 };
 
-function LogoutButton() {
+function LogoutButton(props) {
     return (
-      <button onClick={ localStorage.removeItem("id")}>
-        Log Out
-      </button>
-    );
+        <button onClick={() => localStorage.removeItem("id")}>
+          Log Out
+        </button>
+      );
   }
 
-class App extends Component {
+class App extends Component { 
+    constructor(p) {
+        super(p);
+        this.state = {isLog: isAuth()}
+    }
     render() {
         let button;
 
-        if (isAuth) {
+        if (isAuth()) {
            button = <LogoutButton />;
           } else {
-              button = null;
+           button = null;
           }
 
         return(
