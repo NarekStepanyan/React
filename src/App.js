@@ -12,17 +12,45 @@ import Home from "./Home";
 import UsersList from "./UsersList";
 import  "./App.css";
 
-const PrivateRoute = ({children: Component, ...props}) => {
- 
-      const val = localStorage.getItem("id");
-        return <Route {...props}>
-          {val? <Component/>: <Redirect to='/login'/>}
-      </Route>
-   }
+const isAuth = () => {
+    if (localStorage.getItem("id")) {
+        return true;
+    }
+
+    return false;
+}
+
+const PrivateRoute = ({children: Component, ...rest}) => {
+    return (
+        <Route {...rest} render={props => (
+            isAuth() ?
+                <Component {...props} />
+            : <Redirect to="/login" />
+        )} >
+        </Route>
+    );
+};
+
+function LogoutButton() {
+    return (
+      <button onClick={ localStorage.removeItem("id")}>
+        Log Out
+      </button>
+    );
+  }
 
 class App extends Component {
     render() {
+        let button;
+
+        if (isAuth) {
+           button = <LogoutButton />;
+          } else {
+              button = null;
+          }
+
         return(
+            <div>
             <Router>
                 <div>
 
@@ -30,9 +58,7 @@ class App extends Component {
                         <Route path="/login">
                             <nav className='a'>
                                 <Link to="/home">Home</Link>
-                                <Link to="/signup">Sign Up</Link>
-                                <Link to="/userslist">All Users</Link>
-
+                                <Link to="/signup">Sign Up</Link>                            
                             </nav>
                             <LogIn />
                         </Route>
@@ -41,7 +67,6 @@ class App extends Component {
                                 <Link to="/login">Log In</Link>
                                 <Link to="/home">Home</Link>
                                 <Link to="/userslist">All Users</Link>
-
                             </nav>
                             <SignUp />
                         </Route>
@@ -49,7 +74,7 @@ class App extends Component {
                              <nav>
                                  <Link to="/login">Log In</Link>
                                  <Link to="/signup">Sign Up</Link>
-                                 <Link to="/userslist">All Users</Link>
+                                
                              </nav>
 
                              <Home />
@@ -58,7 +83,10 @@ class App extends Component {
                     </Switch>
                 </div>
             </Router>
-        );
+
+           {button}
+            </div>
+        );                           
     }
 
 }

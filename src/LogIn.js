@@ -16,13 +16,13 @@ class LogIn extends Component{
 
     logging = e => {
         e.preventDefault()
-        fetch(`http://localhost:3000/users?email=${this.state.email}&pass=${this.state.pass}`)
+        fetch(`http://localhost:3001/users?email=${this.state.email}&pass=${this.state.pass}`)
             .then(res => res.json())
             .then(data => {
                 localStorage.setItem('id', data[0].id)
                 this.props.history.push('/userslist');
             })
-            .catch(err => alert('non-existent username or password'))
+            .catch(err => alert('invalid username or password'))
 
             this.setState({
                 email: '',
