@@ -7,7 +7,7 @@ class LogIn extends Component{
         super(p);
         this.state= {
             email: '',
-            pass: ''
+            password: ''
         };
     }
     change = e => this.setState({
@@ -26,7 +26,7 @@ class LogIn extends Component{
 
             this.setState({
                 email: '',
-                pass: ''
+                password: ''
             })
     }
 
@@ -36,7 +36,7 @@ class LogIn extends Component{
                <h1>Log In</h1>
                <input name='email' value={this.state.email} type='text' placeholder='email or phone number' onChange={this.change}/>
                <br /> <br />
-               <input name='pass' value={this.state.pass} type='password' placeholder='password' onChange={this.change}/>
+               <input name='pass' value={this.state.password} type='password' placeholder='password' onChange={this.change}/>
                <br /> <br />
                <input type='submit' value='Log In' className='button'/>
            </form>

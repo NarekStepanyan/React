@@ -1,44 +1,12 @@
 {
   "users": [
     {
-      "fname": "kjirtuewq",
-      "lname": "cvdre34",
-      "country": "malecsqw",
+      "first_name": "kjirtuewq",
+      "last_name": "cvdre34",
       "email": "564816987",
-      "pass": "bngh3905u",
+      "passwords": "bngh3905u",
       "id": 1
-    },
-    {
-      "fname": "oiub",
-      "lname": "yrw",
-      "country": "ydggt",
-      "email": "gt",
-      "pass": "asdfgh",
-      "id": 2
-    },
-    {
-      "fname": "4gjmng",
-      "lname": "qwv235v",
-      "country": "jb56b5",
-      "email": "fdgvdrg748",
-      "pass": "tyfudburt7894",
-      "id": 3
-    },
-    {
-      "fname": "Aram",
-      "lname": "Aramyan",
-      "country": "Armenia",
-      "email": "aram123",
-      "pass": "123aram",
-      "id": 4
-    },
-    {
-      "fname": "oiub",
-      "lname": "ftyy",
-      "country": "ydggt",
-      "email": "gt",
-      "pass": "gh",
-      "id": 5
     }
+
   ]
 }
