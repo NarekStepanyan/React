@@ -1,6 +1,7 @@
 import {Component} from "react";
 import  "./App.css";
 import {withRouter} from 'react-router-dom';
+import {URL} from "./App";
 
 class LogIn extends Component{
     constructor(p) {
@@ -16,7 +17,7 @@ class LogIn extends Component{
 
     logging = e => {
         e.preventDefault()
-        fetch(`http://localhost:3001/users?email=${this.state.email}&pass=${this.state.pass}`)
+        fetch(`${URL}?email=${this.state.email}&pass=${this.state.password}`)
             .then(res => res.json())
             .then(data => {
                 localStorage.setItem('id', data[0].id)
@@ -36,7 +37,7 @@ class LogIn extends Component{
                <h1>Log In</h1>
                <input name='email' value={this.state.email} type='text' placeholder='email or phone number' onChange={this.change}/>
                <br /> <br />
-               <input name='pass' value={this.state.password} type='password' placeholder='password' onChange={this.change}/>
+               <input name='password' value={this.state.password} type='password' placeholder='password' onChange={this.change}/>
                <br /> <br />
                <input type='submit' value='Log In' className='button'/>
            </form>

@@ -54,7 +54,7 @@ class SignUp extends Component{
                 <br /> <br />
                 <input type='text' value={this.state.email} placeholder='email or phone number' name='email' onChange={this.changeHandler}/>
                 <br /> <br />
-                <input type='password' value={this.state.password} placeholder='password' name='pass' onChange={this.changeHandler}/>
+                <input type='password' value={this.state.password} placeholder='password' name='password' onChange={this.changeHandler}/>
                 <br /> <br />
                 <button type='submit' value='Sign Up' className='button'>Sign Up</button>
             </form>

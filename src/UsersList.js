@@ -1,5 +1,6 @@
 
 import {Component} from "react";
+import {connect} from "react-redux";
 import  "./App.css";
 
 class UsersList extends Component{
@@ -9,9 +10,9 @@ class UsersList extends Component{
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/users")
-            .then(res => res.json())
-            .then(json => this.setState(json))
+
+        dispatch(loadUsersList());
+
     }
     
     render() {
@@ -20,7 +21,7 @@ class UsersList extends Component{
         
         let usersList = Object.values(this.state)
         .filter(item => item.id.toString() !== currentUserId)
-        .map((obj, id) => <tr key={id.toString()}><td>{obj.fname}</td><td>{obj.lname}</td><td>from  {obj.country}</td></tr>);
+        .map((obj, id) => <tr key={id.toString()}><td>{obj.first_name}</td><td>{obj.last_name}</td></tr>);
         
         return (
            <table><tbody className="ulist">{usersList}</tbody></table>
@@ -28,4 +29,10 @@ class UsersList extends Component{
     }
 }
 
-export default  UsersList;
+const mapStateToProps = (state) => {
+    return {
+        users : state.users
+    }
+}
+
+export default  connect(mapStateToProps)(UsersList);

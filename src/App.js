@@ -12,6 +12,8 @@ import Home from "./Home";
 import UsersList from "./UsersList";
 import  "./App.css";
 
+export const URL = "http://localhost:3001/users";
+
 const isAuth = () => {
     if (localStorage.getItem("id")) {
         return true;
@@ -77,14 +79,20 @@ class App extends Component {
                          <Route path="/home">
                              <nav>
                                  <Link to="/login">Log In</Link>
-                                 <Link to="/signup">Sign Up</Link>
-                                
+                                 <Link to="/signup">Sign Up</Link>                               
                              </nav>
 
                              <Home />
                         </Route>
-                       <PrivateRoute children={UsersList} path="/userslist"></PrivateRoute>
+                        <Route path="/userslist">
+                             <nav>
+                                 <Link to="/login">Log In</Link>
+                                 <Link to="/signup">Sign Up</Link>                               
+                             </nav>
+                        </Route>
+                       
                     </Switch>
+                    <PrivateRoute children={UsersList} path="/userslist"></PrivateRoute>
                 </div>
             </Router>
 
