@@ -1,6 +1,5 @@
-import {URL} from "./App";
-
-export function loadUsersList() {
+{/*import {URL} from "./App
+    function loadUsersList() {
     return (dispatch, getState) => {
         return  fetch({URL})
         .then(res => res.json())
@@ -9,4 +8,4 @@ export function loadUsersList() {
             payload: data
         }))
     }
-}
+}*/}

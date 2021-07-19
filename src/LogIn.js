@@ -1,16 +1,11 @@
 import {Component} from "react";
 import  "./App.css";
-import {withRouter} from 'react-router-dom';
+import {useState} from 'react';
 import {URL} from "./App";
 
-class LogIn extends Component{
-    constructor(p) {
-        super(p);
-        this.state= {
-            email: '',
-            password: ''
-        };
-    }
+const LogIn = () => {
+    const [email, setEmail] = useState('')
+
     change = e => this.setState({
         [e.target.name]: e.target.value,
     });
@@ -25,13 +20,9 @@ class LogIn extends Component{
             })
             .catch(err => alert('invalid username or password'))
 
-            this.setState({
-                email: '',
-                password: ''
-            })
+
     }
 
-    render() {
         return (
            <form onSubmit={this.logging}>
                <h1>Log In</h1>
@@ -42,7 +33,6 @@ class LogIn extends Component{
                <input type='submit' value='Log In' className='button'/>
            </form>
         );
-    }
 }
 
 export default  withRouter(LogIn);
