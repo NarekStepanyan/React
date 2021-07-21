@@ -1,4 +1,4 @@
-import {Component} from "react";
+import {useState} from "react";
 import {
     BrowserRouter as Router,
     Switch,
@@ -41,12 +41,10 @@ function LogoutButton(props) {
       );
   }
 
-class App extends Component { 
-    constructor(p) {
-        super(p);
-        this.state = {isLog: isAuth()}
-    }
-    render() {
+const App = () => { 
+
+    const [isAith, setIsAuth] = useState("")
+   
         let button;
 
         if (isAuth()) {
@@ -101,6 +99,6 @@ class App extends Component {
         );                           
     }
 
-}
+
 
 export default App;

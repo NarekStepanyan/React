@@ -1,65 +1,52 @@
-import {Component} from "react";
+import {useState} from "react";
+import {URL} from "./App";
 
-class SignUp extends Component{
-    constructor(p) {
-        super(p);
-        this.state= { 
-            first_name: '',
-            last_name: '',
-            email: '',
-            password: ''
-        }
-    }
-
-    changeHandler = e => this.setState({
-        [e.target.name]: e.target.value,
-    });
+const SignUp = () => {
+  
+        const [first_name, setFirst_name] = useState("");
+        const [last_name, setLast_name] = useState("");    
+        const [email, setEmail] = useState("");   
+        const [password, setPassword] = useState(""); 
 
     signing = e => {
 
        const body = JSON.stringify({
-           first_name: this.state.first_name,
-           last_name: this.state.last_name,
-           email: this.state.email,
-           password: this.state.password
+           first_name,
+           last_name,
+           email,
+           password
        });
 
         e.preventDefault();
-        fetch("http://localhost:3001/users", {
+
+        fetch({URL}, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
           body,
-        })
-
-        this.setState({ 
-            first_name: '',
-            last_name: '',
-            email: '',
-            password: ''
-        })
+        })  
+        
+        setFirst_name("");
+        setLast_name("");
+        setEmail("");
+        setPassword("");
     }
-
-
-
-    render() {
-
         return (
-            <form onSubmit={this.signing}>
+            <form onSubmit={signing}>
                 <h1>Sign Up</h1>
-                <input type='text' value={this.state.first_name} placeholder='First name' name='fname' onChange={this.changeHandler} />
+                <input type='text' value={first_name} placeholder='First name' name='fname' onChange={setFirst_name(e.target.value)} />
                 <br /> <br />
-                <input type='text' value={this.state.last_name} placeholder='Last name' name='lname' onChange={this.changeHandler}/>
+                <input type='text' value={last_name} placeholder='Last name' name='lname' onChange={setLast_name(e.target.value)}/>
                 <br /> <br />
-                <input type='text' value={this.state.email} placeholder='email or phone number' name='email' onChange={this.changeHandler}/>
+                <input type='text' value={email} placeholder='email or phone number' name='email' onChange={setEmail(e.target.value)}/>
                 <br /> <br />
-                <input type='password' value={this.state.password} placeholder='password' name='password' onChange={this.changeHandler}/>
+                <input type='password' value={password} placeholder='password' name='password' onChange={setPassword(e.target.value)}/>
                 <br /> <br />
                 <button type='submit' value='Sign Up' className='button'>Sign Up</button>
             </form>
         );
-    }
+    
 }
 
 export default  SignUp;

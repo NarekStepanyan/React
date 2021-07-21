@@ -1,48 +1,41 @@
-import {Component} from "react";
+import {useState} from "react";
 import  "./App.css";
-import {withRouter} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {URL} from "./App";
 
-class LogIn extends Component{
-    constructor(p) {
-        super(p);
-        this.state= {
-            email: '',
-            password: ''
-        };
-    }
-    change = e => this.setState({
-        [e.target.name]: e.target.value,
-    });
+const LogIn = () => {
+   const [email, setEmail] = useState("");
+   const [password, setPassword] = useState("");
+
+   let history = useHistory();
+   
 
     logging = e => {
-        e.preventDefault()
-        fetch(`${URL}?email=${this.state.email}&pass=${this.state.password}`)
+        e.preventDefault();
+
+        fetch(`${URL}?email=${email}&password=${password}`)
             .then(res => res.json())
             .then(data => {
-                localStorage.setItem('id', data[0].id)
-                this.props.history.push('/userslist');
+                localStorage.setItem('id', data[0].id);
+                history.push('/userslist');
             })
             .catch(err => alert('invalid username or password'))
 
-            this.setState({
-                email: '',
-                password: ''
-            })
+           setEmail("");
+           setPassword("");
     }
 
-    render() {
         return (
-           <form onSubmit={this.logging}>
+           <form onSubmit={logging}>
                <h1>Log In</h1>
-               <input name='email' value={this.state.email} type='text' placeholder='email or phone number' onChange={this.change}/>
+               <input name='email' value={email} type='text' placeholder='email or phone number' onChange={setEmail(e.target.value)}/>
                <br /> <br />
-               <input name='password' value={this.state.password} type='password' placeholder='password' onChange={this.change}/>
+               <input name='password' value={password} type='password' placeholder='password' onChange={setPassword(e.target.value)}/>
                <br /> <br />
                <input type='submit' value='Log In' className='button'/>
            </form>
         );
     }
-}
 
-export default  withRouter(LogIn);
+
+export default  LogIn;

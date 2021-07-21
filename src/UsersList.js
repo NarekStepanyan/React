@@ -1,22 +1,21 @@
 
-import {Component} from "react";
-import {connect} from "react-redux";
+import {useEffect} from "react";
+import { useDispatch } from "react-redux";
+import {URL} from "./App";
 import  "./App.css";
 
-class UsersList extends Component{
-    constructor(p) {
-        super(p);
-        this.state= {};
-    }
 
-    componentDidMount() {
+const UsersList = () => {
+   
+    let dispatch = useDispatch()
 
-        dispatch(loadUsersList());
-
-    }
+    useEffect( fetch({URL})
+    .then(res => res.json())
+    .then(data => dispatch(() => {
+        type:  UsersListTypes.GET_ALL_USERS,
+        payload: data
+    })), [])
     
-    render() {
-
         let currentUserId = localStorage.getItem("id");
         
         let usersList = Object.values(this.state)
@@ -26,13 +25,7 @@ class UsersList extends Component{
         return (
            <table><tbody className="ulist">{usersList}</tbody></table>
     );
-    }
+    
 }
 
-const mapStateToProps = (state) => {
-    return {
-        users : state.users
-    }
-}
-
-export default  connect(mapStateToProps)(UsersList);
+export default UsersList;

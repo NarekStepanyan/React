@@ -1,13 +1,34 @@
 import "./actionTypes";
+import  {combineReducers} from "redux";
+import {UserProfileTypes, UsersListTypes} from "./actionTypes";
+import UsersList from "./UsersList";
+import {loginReducer} from "./loginReducer";
 
-const INIT_STATE = [];
+const INITIAL_STATE_PROFILE = {};
 
-export const rootReducer = (state=INIT_STATE, action) => {
-    switch(action.type) {
+const userProfileReducer = (state= INITIAL_STATE_PROFILE, action) => {
+    switch (action.type) {
+        case UserProfileTypes.GET_USER:
+            return action.payload;
 
-        case GET_USERS_LIST :
+        default: return state;
+    }
+};
+
+const INITIAL_STATE_LIST = [];
+
+const usersListReducer = (state= INITIAL_STATE_LIST, action) => {
+    switch (action.type) {
+        case UsersListTypes.GET_ALL_USERS:
             return [...state, ...action.payload];
 
-            default: return state;
+        default: return state;
     }
-}
+};
+
+export const rootReducer = combineReducers({
+    profile: userProfileReducer,
+    usersList: usersListReducer,
+    login: loginReducer
+
+});
